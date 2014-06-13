@@ -135,9 +135,7 @@ public class RemovingComment {
 			//System.out.println("find");
 		}			
 		
-		return rt;
-		
-		//String pattern = "^/\*+\s+Copyright,*+\s+File name*+\s+Author*+\s+Version*+\s+Date*+\s+Description*+\s+History*"
+		return rt;		
 	}
 	
 	/**
