@@ -36,9 +36,37 @@ public class RemovingComment {
 		}		
 	
 		if(m_bIsFile){
-			readwriteFile(m_strPath);
+			if(isCppFile(file)){
+				readwriteFile(m_strPath);
+			}
+		}else{
+			File[] strAll = file.listFiles();
+			for(int i = 0; i < strAll.length; i++){
+				m_strPath = strAll[i].getAbsolutePath();
+				parseAndRemove();
+			}
 		}
 		
+	}
+	
+	// support .h or .cpp file temporarily
+	private boolean isCppFile(File file){
+		String strName = file.getName();
+		
+		String strhPattern = ".+\\.h";
+		String strcppPattern = ".+\\.cpp";
+		
+		Pattern ptnH = Pattern.compile(strhPattern);
+		Pattern ptnCpp = Pattern.compile(strcppPattern);
+		
+		Matcher mH = ptnH.matcher(strName);
+		Matcher mCpp = ptnCpp.matcher(strName);
+				
+		if(mH.find() || mCpp.find()){
+			return true;
+		}
+		
+		return false;
 	}
 	
 	// read file content and write to the file
@@ -104,7 +132,7 @@ public class RemovingComment {
 			int iEnd = mEnd.end();
 			rt.setStart(iStart);	
 			rt.setEnd(iEnd);
-			System.out.println("find");
+			//System.out.println("find");
 		}			
 		
 		return rt;
@@ -117,7 +145,7 @@ public class RemovingComment {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		RemovingComment rc = new RemovingComment("/home/johnson/comment/AsnBoolean.cpp");
+		RemovingComment rc = new RemovingComment("/home/johnson/comment/TAC/");
 		rc.parseAndRemove();
 	}
 
