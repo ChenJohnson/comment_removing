@@ -18,7 +18,7 @@ public class RemovingComment {
 	}
 	
 	public void parseAndRemove(){
-		if(m_strPath == null){
+		if(m_strPath == null){ 
 			System.out.println("Please input valid path!");
 		}
 		
